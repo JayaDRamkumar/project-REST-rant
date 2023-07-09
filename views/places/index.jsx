@@ -1,18 +1,15 @@
 const React = require('react')
 const Def = require('../default')
 
-function viewplaces () {
-    return (
-      <Def>
-          <main>
-              <h1>view places</h1>
-          </main>
-      </Def>
-    )
-  }
-  
-
-module.exports = viewplaces
+// function viewplaces () {
+//     return (
+//       <Def>
+//           <main>
+//               <h1>view places</h1>
+//           </main>
+//       </Def>
+//     )
+//   }
 
 function index (data) {
   let placesFormatted = data.places.map((place) => {
@@ -32,3 +29,4 @@ function index (data) {
     </Def>
 )
 }
+module.exports = index
