@@ -2,6 +2,25 @@ const React = require('react')
 const Def = require('../default')
 
 function show (data) {
+  let comments = (
+    <h3 className="inactive">
+      No comments yet!
+    </h3>
+  )
+  if (data.place.comments.length) {
+    comments = data.place.comments.map(c => {
+      return (
+        <div className="border">
+          <h2 className="rant">{c.rant ? 'Rant! ðŸ˜¡' : 'Rave! ðŸ˜»'}</h2>
+          <h4>{c.content}</h4>
+          <h3>
+            <stong>- {c.author}</stong>
+          </h3>
+          <h4>Rating: {c.stars}</h4>
+        </div>
+      )
+    })
+  }
     return (
         <Def>
   <main>
@@ -33,7 +52,40 @@ function show (data) {
            </button>
         </form>
     </div>
+    <div className="row">
+            ...
+          </div>
+          <hr />
+          <h2>Comments</h2>
+          {comments}
     </div>
+    <h1>Rant or Rave</h1>
+            <form method="POST" action="/comments">
+                <div className="form-group">
+                  <label htmlFor="author">Author</label>
+                  <input className="form-control" id="author" name="author" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="content">Content</label>
+                  <input className="form-control" id="content" name="content" required />
+                </div>
+                <div className="form-group col-sm-4">
+                    <label htmlFor="starrating">Star Rating</label>
+                    <input type="range" 
+                    min="0" 
+                    max="5" step="0.5" 
+                    pattern="\d+" />
+                  </div>
+                  <div className="form-group col-sm-4">
+                    <label htmlFor="rant">Rant</label>
+                    <input class="messageCheckbox" 
+                    type="checkbox" 
+                    value="3" 
+                    name="mailId[]" />
+                         </div>
+                      </form>
+                <input className="btn btn-primary" type="submit" value="Comment" />
+
   </main>
   
 </Def>
@@ -69,4 +121,3 @@ module.exports = show
 //     </Def>
 //   );
 // }
-
