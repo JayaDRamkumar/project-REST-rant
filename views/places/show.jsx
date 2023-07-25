@@ -7,6 +7,24 @@ function show (data) {
       No comments yet!
     </h3>
   )
+  let rating = (
+    <h3 className="inactive">
+      Not yet rated
+    </h3>
+  )
+  if (data.place.comments.length) {
+    let sumRatings = data.place.comments.reduce((tot, c) => {
+      return tot + c.stars
+    }, 0)
+    let averageRating = sumRatings / data.place.comments.length
+    rating = (
+      <h3>
+        {averageRating} stars
+      </h3>
+    )
+    
+  }
+  
   if (data.place.comments.length) {
     comments = data.place.comments.map(c => {
       return (
@@ -17,6 +35,7 @@ function show (data) {
             <stong>- {c.author}</stong>
           </h3>
           <h4>Rating: {c.stars}</h4>
+          
         </div>
       )
     })
@@ -29,6 +48,11 @@ function show (data) {
         <h1>
         <img src={data.place.pic} alt={data.place.name} /> 
             </h1>
+            <h2>
+                Rating
+              </h2>
+              {rating}
+              <br />
         <h3>
           Located in {data.place.city}, {data.place.state}
         </h3>
@@ -73,8 +97,7 @@ function show (data) {
                     <label htmlFor="starrating">Star Rating</label>
                     <input type="range" 
                     min="0" 
-                    max="5" step="0.5" 
-                    pattern="\d+" />
+                    max="5" step="0.5" pattern="\d+" />
                   </div>
                   <div className="form-group col-sm-4">
                     <label htmlFor="rant">Rant</label>
@@ -121,3 +144,7 @@ module.exports = show
 //     </Def>
 //   );
 // }
+
+
+
+
