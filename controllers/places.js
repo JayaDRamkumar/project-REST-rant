@@ -99,14 +99,15 @@ router.delete('/:id/rant/:rantId', (req, res) => {
 })
 
 
-router.post('/:id/comment', (req, res) => {
-  console.log(req.body)
-  req.body.rant = req.body.rant ? true : false
-  res.send('GET /places/:id/comment stub')
-})
+// router.post('/:id/comment', (req, res) => {
+//   console.log(req.body)
+//   req.body.rant = req.body.rant ? true : false
+//   res.send('GET /places/:id/comment stub')
+// })
 
 router.post('/:id/comment', (req, res) => {
   console.log(req.body)
+  req.body.rant= req.body.rant? true:false
   db.Place.findById(req.params.id)
   .then(place => {
       db.Comment.create(req.body)
@@ -118,10 +119,12 @@ router.post('/:id/comment', (req, res) => {
           })
       })
       .catch(err => {
+        console.log(err)
           res.render('error404')
       })
   })
   .catch(err => {
+    console.log(err)
       res.render('error404')
   })
 })

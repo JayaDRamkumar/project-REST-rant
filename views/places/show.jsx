@@ -68,9 +68,9 @@ function show (data) {
         <h4>
           Serving {data.place.cuisines}
         </h4>
-                 <a href={`/places/${data.id}/edit`} className="btn btn-warning">           Edit
+                 <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">           Edit
          </a>
-         <form method="POST" action={`places/${data.id}?_method=DELETE`}>
+         <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
           <button type="submit" className="btn btn-danger">
              Delete
            </button>
@@ -84,7 +84,7 @@ function show (data) {
           {comments}
     </div>
     <h1>Rant or Rave</h1>
-            <form method="POST" action="/comments">
+            <form method="POST" action={`/places/${data.place.id}/comment`}>
                 <div className="form-group">
                   <label htmlFor="author">Author</label>
                   <input className="form-control" id="author" name="author" required />
@@ -94,8 +94,11 @@ function show (data) {
                   <input className="form-control" id="content" name="content" required />
                 </div>
                 <div className="form-group col-sm-4">
-                    <label htmlFor="starrating">Star Rating</label>
-                    <input type="range" 
+                    <label htmlFor="stars">Star Rating</label>
+                    <input 
+                    id="stars" 
+                    name="stars"
+                    type="range" 
                     min="0" 
                     max="5" step="0.5" pattern="\d+" />
                   </div>
@@ -104,10 +107,11 @@ function show (data) {
                     <input class="messageCheckbox" 
                     type="checkbox" 
                     value="3" 
-                    name="mailId[]" />
+                    name="rant" />
                          </div>
+                         <input className="btn btn-primary" type="submit" value="Comment" />
                       </form>
-                <input className="btn btn-primary" type="submit" value="Comment" />
+                
 
   </main>
   
